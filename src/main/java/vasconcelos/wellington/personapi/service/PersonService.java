@@ -9,6 +9,7 @@ import vasconcelos.wellington.personapi.dto.mapper.PersonMapper;
 import vasconcelos.wellington.personapi.exception.PersonNotFoundException;
 import vasconcelos.wellington.personapi.repository.PersonRepository;
 
+import javax.persistence.Id;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -42,9 +43,18 @@ public class PersonService {
     }
 
     public PersonDTO findById(Long id) throws PersonNotFoundException {
-        Person person = personRepository.findById(id)
-                .orElseThrow(() -> new PersonNotFoundException(id));
+        Person person = verifyIfExists(id);
 
         return personMapper.toDTO(person);
     }
+        public void delete(Long id) throws PersonNotFoundException {
+            verifyIfExists(id);
+        
+        personRepository.deleteById(id);
+    }
+    private Person verifyIfExists(Long id) throws PersonNotFoundException {
+        return personRepository.findById(id)
+                .orElseThrow(() -> new PersonNotFoundException(id));
+    }
 }
+

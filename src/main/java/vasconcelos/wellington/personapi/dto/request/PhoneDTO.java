@@ -1,16 +1,17 @@
 package vasconcelos.wellington.personapi.dto.request;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import vasconcelos.wellington.personapi.enums.PhoneType;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
 
-@Entity
 @Data
 @Builder
 @AllArgsConstructor
