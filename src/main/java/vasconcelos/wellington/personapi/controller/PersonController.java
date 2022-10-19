@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import vasconcelos.wellington.personapi.dto.MessageResponseDTO;
 import vasconcelos.wellington.personapi.dto.request.PersonDTO;
 import vasconcelos.wellington.personapi.entity.Person;
+import vasconcelos.wellington.personapi.exception.PersonNotFoundException;
 import vasconcelos.wellington.personapi.service.PersonService;
 
 import javax.validation.Valid;
@@ -29,9 +30,13 @@ public class PersonController {
         return personService.createPerson(personDTO);
 
     }
-
+    @GetMapping
     public List<PersonDTO> listAll() {
-
         return personService.listAll();
+    }
+
+    @GetMapping("/{id}")
+    public PersonDTO findById(@PathVariable Long id) throws PersonNotFoundException {
+        return personService.findById(id);
     }
 }

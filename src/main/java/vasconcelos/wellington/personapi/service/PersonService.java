@@ -6,9 +6,11 @@ import vasconcelos.wellington.personapi.dto.MessageResponseDTO;
 import vasconcelos.wellington.personapi.dto.request.PersonDTO;
 import vasconcelos.wellington.personapi.entity.Person;
 import vasconcelos.wellington.personapi.dto.mapper.PersonMapper;
+import vasconcelos.wellington.personapi.exception.PersonNotFoundException;
 import vasconcelos.wellington.personapi.repository.PersonRepository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -37,5 +39,12 @@ public class PersonService {
         return allPeople.stream()
                 .map(personMapper::toDTO)
                 .collect(Collectors.toList());
+    }
+
+    public PersonDTO findById(Long id) throws PersonNotFoundException {
+        Person person = personRepository.findById(id)
+                .orElseThrow(() -> new PersonNotFoundException(id));
+
+        return personMapper.toDTO(person);
     }
 }
