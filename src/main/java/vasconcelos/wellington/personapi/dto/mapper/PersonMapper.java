@@ -1,4 +1,4 @@
-package vasconcelos.wellington.personapi.mapper;
+package vasconcelos.wellington.personapi.dto.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

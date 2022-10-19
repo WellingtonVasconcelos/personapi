@@ -5,8 +5,11 @@ import org.springframework.stereotype.Service;
 import vasconcelos.wellington.personapi.dto.MessageResponseDTO;
 import vasconcelos.wellington.personapi.dto.request.PersonDTO;
 import vasconcelos.wellington.personapi.entity.Person;
-import vasconcelos.wellington.personapi.mapper.PersonMapper;
+import vasconcelos.wellington.personapi.dto.mapper.PersonMapper;
 import vasconcelos.wellington.personapi.repository.PersonRepository;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PersonService {
@@ -27,5 +30,12 @@ public class PersonService {
                 .builder()
                 .message("Created person with ID " + savePerson.getId())
                 .build();
+    }
+
+    public List<PersonDTO> listAll() {
+        List<Person> allPeople = personRepository.findAll();
+        return allPeople.stream()
+                .map(personMapper::toDTO)
+                .collect(Collectors.toList());
     }
 }

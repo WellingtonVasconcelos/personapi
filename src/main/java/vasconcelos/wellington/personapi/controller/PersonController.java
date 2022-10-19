@@ -11,6 +11,7 @@ import vasconcelos.wellington.personapi.entity.Person;
 import vasconcelos.wellington.personapi.service.PersonService;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/people")
@@ -27,5 +28,10 @@ public class PersonController {
     public MessageResponseDTO createPerson(@RequestBody @Valid PersonDTO personDTO){
         return personService.createPerson(personDTO);
 
+    }
+
+    public List<PersonDTO> listAll() {
+
+        return personService.listAll();
     }
 }
